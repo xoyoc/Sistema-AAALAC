@@ -1,73 +1,79 @@
-# ADMON - Nombre del Agente Aduanal, Numero de patente, email, fecha de incripcion y estatus 
-# ADMON - Requisitos, entrega de documentacion, pago de couta y entrevista
-# ADMON - Nombre de Agencia Aduanal, RFC, Domicilio y telefonos
-# GERENCIA - Nombre del Gerente, Celular, email
-# ADMON - Nombre del contacto admon y email
-# PREVALIDADOR OPERACIONES - Nombre del contacto trafico y email
-# OPERACIONES - Nombre del conctato operacion, celular y email
-# IT -  Usuarios y Claves de * Web AAALAC * NAS
+# !/usr/bin/env python3
+# -*- enconding: utf-8 -*-
 
 import datetime
 import calendar
 
-from peewee import *
+from collections import OrderedDict
 from tabulate import tabulate
+from peewee import *
+from modelos import Agente_Aduanal, Requisito, Agencia_Aduanal, Sistema
 
-db = SqliteDatabase(NombreDB)
+nombreDB = 'DB_AAALAC.db'
+db = SqliteDatabase(nombreDB)
 
-class Agente_Aduanal:(Model):
-	"""Base de Datos del Agente_Aduanal"""
-	numero_patente = IntegerField()
-	nombre_agente = CharField()
-	fecha_incripcion = DateField()
-	correo_electronico = CharField()
-	estatus = CharField()
+def creacion_conexion():
+	db.connect()
+	db.create_tables([Agente_Aduanal,Requisito,Agencia_Aduanal,Sistema], safe = True)
 
-	class Meta:
-		database = db
+def menu_loop():
+	opcion = None
+	while opcion != 'q':
+		print()
+		print("Presione la tecla Q para salir")
+		for key, value in menu.items():
+			print("{} - {}".format(key, value.__doc__))
+		opcion = input("Seleccione una de las siguientes opciones :").lower().strip()
+		print()
+		if opcion in menu:
+			menu[opcion]()
 
-class Requisito:(Model):
-	"""Base de Datos del Requisitos del cumplimineto de Alta"""
-	patente_requisito = ForeignKeyField(Agente_Aduanal, related_name='agente_requisito')
-	curp = CharField()
-	carta_aaalac = BooleanField()
-	carta_referencia = BooleanField()
-	copia_acta_constitutiva = BooleanField()
-	copia_publicacion_dof = BooleanField()
-	copia_no_adeudo = BooleanField()
-	copia_poder_notarial = BooleanField()
-	pago_inscripcion = BooleanField()
+def alta_agente():
+	"""Alta de Agente Aduanal"""
+	patente = input("Numero de patente :")
+	agente_aduanal = input("Nombre del Agente Aduanal :").title()
+	correo = input("Correo Electronico :")
+	fecha = input("Fecha de Incripcion :")
+	Agente_Aduanal.create(
+		numero_patente = patente,
+		nombre_agente = agente_aduanal,
+		fecha_incripcion = fecha,
+		correo_electronico = correo,
+		estatus = 'Pendiente'
+		)
+	print()
+	print("Agente Aduanal dado de Alta con Exito...")
 
-class Meta:
-		database = db
+def requisito():
+	"""Cumplimineto de requisitos para estatus"""
 
-class Agencia_Aduanal:(Model):
-	"""Base de Datos de la Agencia Aduanal"""
-	patente_agencia = ForeignKeyField(Agente_Aduanal, related_name='agente_agencia'
-	nombre_agencia = CharField()
-	rfc = CharField()
-	domicilio = TextField()
-	telefono = IntegerField()
-	nombre_gerente = CharField()
-	gerente_movil = IntegerField()
-	gerente_correo = CharField()
-	nombre_admon = CharField()
-	admon_correo = CharField()
-	nombre_trafico = CharField()
-	trafico_correo = CharField()
-	nombre_operaciones = CharField()
-	operaciones_movil = IntegerField()
-	operaciones_correo = CharField()
+def alta_agencia():
+	"""Alta de Agencia Aduanal datos de Contacto"""
 
-	class Meta:
-		database = db
+def sistema():
+	"""Alta de sus claves para web AAALAC y NAS"""
 
-class Sistema:(Model):
-	"""Base de Datos de la Sistemas"""
-	patente_sistemas = ForeignKeyField(Agente_Aduanal, related_name='agente_sistemas'
-	nombre_sistema = CharField()
-	usuario = CharField()
-	password = CharField()
+def lista_agentes():
+	"""Lista de todos los Agentes Aduanales"""
+	lista = []
+	for agente in Agente_Aduanal.select():
+		registro = [agente.numero_patente, agente.nombre_agente, agente.fecha_incripcion, agente.estatus]
+		lista.append(registro)
+	encabezado = ["Patente", "Agente Aduanal", "Fecha Incripcion", "Estatus"]
+	print(tabulate(lista, encabezado, tablefmt='grid'))
 
-	class Meta:
-		database = db
+menu = OrderedDict([
+	('a',alta_agente),
+	('r',requisito),
+	('g',alta_agencia),
+	('s',sistema),
+	('l',lista_agentes)
+	])
+
+
+if __name__ == '__main__':
+	creacion_conexion()
+	print()
+	print("+++++++++++++++++++ Sistema de Alta de Agentes Aduanales de AAALAC ver1 ++++++++++++++++++++++++++++")
+	menu_loop()
+
