@@ -35,14 +35,15 @@ class Requisito(Model):
 	copia_poder_notarial = BooleanField()
 	pago_inscripcion = BooleanField()
 
-class Meta:
+	class Meta:
 		database = db
 
 class Agencia_Aduanal(Model):
 	"""Base de Datos de la Agencia Aduanal"""
-	patente_agencia = ForeignKeyField(Agente_Aduanal, related_name='agente_agencia')
-	nombre_agencia = CharField()
 	rfc = CharField()
+	patente_agencia = ForeignKeyField(Agente_Aduanal, related_name='agente_agencia')
+	patente_respaldo = CharField()
+	nombre_agencia = CharField()
 	domicilio = TextField()
 	telefono = IntegerField()
 	nombre_gerente = CharField()
