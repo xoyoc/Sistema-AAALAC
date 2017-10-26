@@ -8,6 +8,7 @@ from collections import OrderedDict
 from tabulate import tabulate
 from peewee import *
 from modelos import Agente_Aduanal, Requisito, Agencia_Aduanal, Sistema
+from agencia import alta_agencia
 
 nombreDB = 'DB_AAALAC.db'
 db = SqliteDatabase(nombreDB)
@@ -86,10 +87,6 @@ def requisito():
 		print("La patente no existe favor de verificar....")
 
 	
-
-def alta_agencia():
-	"""Alta de Agencia Aduanal datos de Contacto"""
-
 def sistema():
 	"""Alta de sus claves para web AAALAC y NAS"""
 

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+	<div class="card mt-2 pt-2">
+		<div class="card-header">
+			<h2 class="display-4 card-title">Patente : 
+				<strong>{{ agencia[0].numero_patente }}</strong>
+			</h2>		
+		</div>
+		<div class="card-body lead">
+			<p>Nombre de Agencia Aduanal : 
+				<strong>{{ agencia[0].agencia_aduanal.nombre_agencia }}</strong>
+			</p>
+			<p>Nombre del Agente Aduanal : 
+				<strong>{{ agencia[0].nombre_agente }}</strong>
+			</p>
+			<p>Telefono : 
+				<strong><a href="tel={{ agencia[0].agencia_aduanal.telefono }}">{{ agencia[0].agencia_aduanal.telefono }}</a></strong>
+			</p>
+			<p>Nombre del Encagado de Operacion : 
+				<strong>{{ agencia[0].agencia_aduanal.nombre_operaciones }}</strong>
+			</p>
+			<p>Correo Electronico del Encargado de Operacion : 
+				<strong><a href="mailto:{{ agencia[0].agencia_aduanal.operaciones_correo }}">{{ agencia[0].agencia_aduanal.operaciones_correo }}</a></strong>
+			</p>
+			<p>Celular : 
+				<strong><a href="tel={{ agencia[0].agencia_aduanal.operaciones_movil }}">{{ agencia[0].agencia_aduanal.operaciones_movil }}</a></strong>
+			</p>
+		</div> 
+	</div>
+{% endblock %}

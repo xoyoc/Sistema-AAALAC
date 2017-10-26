@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+
+	<h2 class="mt-5 pt-4">Vista de Operaciones</h2>
+
+	<table class="table">
+		<thead>
+			<th>Patente</th>
+			<th>Nombre del Agente Aduanal</th>
+			<th>Nombre de la Agencia Aduanal</th>
+			<th>Telefono</th>
+		</thead>
+		<tbody>
+			{% for agencia in agencias %}
+				<tr>
+					<td><a href="/operaciones/{{ agencia.numero_patente }}">{{ agencia.numero_patente }}</a></td>
+					<td>{{ agencia.agencia_aduanal.nombre_agencia }}</td>
+					<td>{{ agencia.nombre_agente }}</td>
+					<td><a href="tel={{ agencia.agencia_aduanal.telefono }}">{{ agencia.agencia_aduanal.telefono }}</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock %}

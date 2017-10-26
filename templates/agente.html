@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+	<div class="card mt-2 pt-2">
+		<div class="card-header">
+			<h2 class="display-4 card-title">Patente : <strong>{{patente.numero_patente}}</strong></h2>		
+		</div>
+		<div class="card-body lead">
+			<p>Nombre del Agente Aduanal : <strong>{{patente.nombre_agente}}</strong></p>
+			<p>Fecha de inscripcion : <strong>{{patente.fecha_incripcion}}</strong></p>
+			<p>Correo electronico : <strong><a href="mailto:{{patente.correo_electronico}}">{{patente.correo_electronico}}</a></strong></p>
+			<p>Estatus : <strong>{{patente.estatus}}</strong></p>
+		</div>
+	</div>
+{% endblock %}

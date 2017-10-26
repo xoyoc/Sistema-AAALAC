@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+
+	<h2 class="mt-5 pt-4">Sistema principal</h2>
+	<table class="table">
+		<thead>
+			<th>Patente</th>
+			<th>Nombre del Agente Aduanal</th>
+			<th>Estatus</th>
+		</thead>
+		<tbody>
+			{% for tabla in tablas %}
+				<tr>
+					<td><a href="/{{ tabla.numero_patente }}">{{ tabla.numero_patente }}</a></td>
+					<td>{{ tabla.nombre_agente }}</td>
+					<td>{{ tabla.estatus }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock %}
