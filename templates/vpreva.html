@@ -2,26 +2,24 @@
 
 {% block contenido %}
 
-	<h2 class="mt-5 pt-4">Vista de Administracion</h2>
+	<h2 class="mt-5 pt-4">Vista de Prevalidador</h2>
 
 	<table class="table">
 		<thead>
 			<th>Patente</th>
-			<th>RFC</th>
 			<th>Nombre de la Agencia Aduanal</th>
 			<th>Telefono</th>
-			<th>Encargado de Admon</th>
+			<th>Encargado de trafico</th>
 			<th>Correo</th>
 		</thead>
 		<tbody>
 			{% for agencia in agencias %}
 				<tr>
 					<td>{{ agencia.numero_patente }}</td>
-					<td>{{ agencia.agencia_aduanal.rfc }}</td>
 					<td>{{ agencia.agencia_aduanal.nombre_agencia }}</td>
 					<td><a href="tel={{ agencia.agencia_aduanal.telefono }}">{{ agencia.agencia_aduanal.telefono }}</a></td>
-					<td>{{ agencia.agencia_aduanal.nombre_admon }}</td>
-					<td><a href="mailto:{{ agencia.agencia_aduanal.admon_correo }}">{{ agencia.agencia_aduanal.admon_correo }}</a></td>
+					<td>{{ agencia.agencia_aduanal.nombre_trafico }}</td>
+					<td><a href="mailto:{{ agencia.agencia_aduanal.trafico_correo }}">{{ agencia.agencia_aduanal.trafico_correo }}</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

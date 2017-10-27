@@ -1,19 +1,4 @@
-# 	rfc = CharField()
-# 	patente_agencia = ForeignKeyField(Agente_Aduanal, related_name='agente_agencia')
-# 	patente_respaldo = CharField()
-# 	nombre_agencia = CharField()
-# 	domicilio = TextField()
-# 	telefono = IntegerField()
-# 	nombre_gerente = CharField()
-# 	gerente_movil = IntegerField()
-# 	gerente_correo = CharField()
-# 	nombre_admon = CharField()
-# 	admon_correo = CharField()
-# 	nombre_trafico = CharField()
-# 	trafico_correo = CharField()
-# 	nombre_operaciones = CharField()
-# 	operaciones_movil = IntegerField()
-# 	operaciones_correo = CharField()
+#
 
 import datetime
 import calendar
